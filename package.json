@@ -1,0 +1,21 @@
+{
+  "name": "vik_csfml_engine",
+  "version": "2.3.0",
+  "description": "Vik Game Engine for CSFML",
+  "main": "./app.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "author": "ImOverlord",
+  "license": "ISC",
+  "devDependencies": {
+    "electron": "^1.8.2"
+  },
+  "dependencies": {
+    "fs": "0.0.1-security",
+    "fs-extra": "^5.0.0",
+    "image-size": "^0.6.2",
+    "path": "^0.12.7",
+    "url": "^0.11.0"
+  }
+}

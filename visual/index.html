@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>CSFML Engine</title>
+		<link rel="stylesheet" type="text/css" href="./style.css">
+		<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+		<link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+		<script src="./script.js"></script>
+	</head>
+	<body style="background-color: lightgrey">
+		<div id="engine_info" style="display: none">
+			<span id="info_project_path"></span>
+			<span id="info_current_object"></span>
+			<span id="info_current_screen">0</span>
+			<span id="info_current_sound"></span>
+		</div>
+		<div id="shim"></div>
+		<div id="msgbx" class="msgbox">
+			<center>
+				<h3>Script Name</h3>
+				<input type="text" id="script_input_name" /> <br><br>
+				<button onclick="onclick_hide_script_input()">Cancel</button> <button onclick="onclick_show_script_editor()">Create</button>
+			</center>
+		</div>
+		<div id="msgbx1" class="msgbox">
+			<center>
+				<h3>Script Name</h3>
+				<input type="text" id="script1_input_name" /> <br><br>
+				<button onclick="onframe_hide_script_input()">Cancel</button> <button onclick="onframe_show_script_editor()">Create</button>
+			</center>
+		</div>
+		<div id="msgbx2" class="msgbox">
+			<center>
+				<h3>Script Name</h3>
+				<input type="text" id="script2_input_name" /> <br><br>
+				<button onclick="onhover_hide_script_input()">Cancel</button> <button onclick="onhover_show_script_editor()">Create</button>
+			</center>
+		</div>
+		<div id="welcome_msg" class="msgbox">
+			<center>
+				<h3>Welcome</h3>
+				<button onclick="create_new_project()">Create New Project</button> <br><br>
+				<button onclick="open_project()">Open Project</button>
+			</center>
+		</div>
+		<div id="global_settings" class="msgbox">
+			<center>
+				<h3>Global Settings</h3>
+				Game Title:</span><span class="" id="global_title" onclick="global_edit(this.id);"></span><input id="global_title_editor" /><br>
+				Game Width:</span><span class="" id="global_width" onclick="global_edit(this.id);"></span><input id="global_width_editor" /><br>
+				Game Height:</span><span class="" id="global_height" onclick="global_edit(this.id);"></span><input id="global_height_editor" /><br>
+				Fps:</span><span class="" id="global_fps" onclick="global_edit(this.id);"></span><input id="global_fps_editor" /><br>
+				Clock Rate:</span><span class="" id="global_cr" onclick="global_edit(this.id);"></span><input id="global_cr_editor" /><br><br>
+				<button id="hide_global_settings" onclick="global_hide()">Cancel</button>
+			</center>
+		</div>
+		<div id="sound_inspector" class="msgbox">
+			<center>
+				<h3>Sound Inspector</h3>
+				Tag:</span><span class="" id="sound_tag" onclick="sound_edit(this.id);"></span><input id="sound_tag_editor" /><br>
+				Volume:</span><span class="" id="sound_volume" onclick="sound_edit(this.id);"></span><input id="sound_volume_editor" /><br> <br>
+				<!-- State:</span><span class="" id="sound_state" onclick="sound_edit(this.id);"></span><input id="sound_state_editor" /><br> -->
+				<button id="hide_sound_inspector" onclick="sound_inspector_hide()">Cancel</button>
+				<button id="delete_sound_inspector" onclick="sound_inspector_delete()">Delete</button>
+			</center>
+		</div>
+		<div id="new_screen" class="msgbox">
+			<center>
+				<h3>Screen Name</h3>
+				<input type="text" id="screen_name" /> <br><br>
+				<button onclick="hide_ns()" id="new_screen_cancel">Cancel</button> <button onclick="create_new_screen()">Create</button>
+			</center>
+		</div>
+		<div id="screen_option" class="msgbox">
+			<center>
+				<h3>Options</h3>
+				<center>
+					<button onclick="delete_screen()" id="delete_screen">Delete</button> <br><br>
+					<button onclick="onenter_script()" id="onenter_editor">Add OnEnter Script</button> <br><br>
+					<button onclick="onsframe_script()" id="onframe_editor">Add OnFrame Script</button> <br><br>
+				</center>
+				<button onclick="hide_screen_option()" id="screen_option_cancel">Cancel</button>
+			</center>
+		</div>
+		<div id="msgbx3" class="msgbox">
+			<center>
+				<h3>Script Name</h3>
+				<input type="text" id="script3_input_name" /> <br><br>
+				<button onclick="onenter_hide_script_input()">Cancel</button> <button onclick="onenter_show_script_editor()">Create</button>
+			</center>
+		</div>
+		<div id="msgbx4" class="msgbox">
+			<center>
+				<h3>Script Name</h3>
+				<input type="text" id="script4_input_name" /> <br><br>
+				<button onclick="onsframe_hide_script_input()">Cancel</button> <button onclick="onsframes_show_script_editor()">Create</button>
+			</center>
+		</div>
+		<div class="tab" id="window_manager">
+		</div>
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-sm-2">
+					<h3>Hierarchy</h3>
+					<div id="hierarchy_list"></div>
+				</div>
+				<div class="col-sm-8">
+					<center>
+					<canvas id="game_canvas" onclick="canvas_onclick()" class="game_canvas">Error</canvas>
+					</center>
+				</div>
+				<div class="col-sm-2">
+					<h3>Inspector</h3>
+					Tag:
+					<span id="obj_tag" onclick="inspector_edit(this.id);"></span>
+					<input type="text" id="obj_tag_editor" onkeypress="obj_inspector_keypress(this.id)"> <br>
+					X:
+					<span id="obj_x" onclick="inspector_edit(this.id);"></span>
+					<input type="text" id="obj_x_editor" onkeypress="obj_inspector_keypress(this.id)"> <br>
+					Y:
+					<span id="obj_y" onclick="inspector_edit(this.id);"></span>
+					<input type="text" id="obj_y_editor" onkeypress="obj_inspector_keypress(this.id)"> <br>
+					Width:
+					<span id="obj_width" onclick="inspector_edit(this.id);"></span>
+					<input type="text" id="obj_width_editor" onkeypress="obj_inspector_keypress(this.id)"> <br>
+					Height:
+					<span id="obj_height" onclick="inspector_edit(this.id);"></span>
+					<input type="text" id="obj_height_editor" onkeypress="obj_inspector_keypress(this.id)"> <br>
+					Visible:
+					<span id="obj_visible" onclick="inspector_edit(this.id);"></span>
+					<input type="checkbox" id="obj_visible_editor" onclick="change_visibility()"> <br>
+					OnClick:
+					<span id="obj_onclick" onclick="inspector_edit(this.id);"></span>
+					<input type="button" id="obj_onclick_editor" value="..." onclick="on_click_script()"> <br>
+					OnHover:
+					<span id="obj_onhover" onclick="inspector_edit(this.id);"></span>
+					<input type="button" id="obj_onhover_editor" value="..." onclick="on_hover_script()"> <br>
+					OnNewFrame:
+					<span id="obj_onframe" onclick="inspector_edit(this.id);"></span>
+					<input type="button" id="obj_onframe_editor" value="..." onclick="on_frame_script()">
+					<br>
+					<button id="obj_delete" onclick="delete_item()" value="Delete">Delete</button>
+				</div>
+			</div>
+		</div>
+	</body>
+	<script>
+		document.getElementById('global_title_editor').onkeypress=function(e){
+			change_global(this.id, e, 0);
+		}
+		document.getElementById('global_width_editor').onkeypress=function(e){
+			change_global(this.id, e, 1);
+		}
+		document.getElementById('global_height_editor').onkeypress=function(e){
+			change_global(this.id, e, 2);
+		}
+		document.getElementById('global_fps_editor').onkeypress=function(e){
+			change_global(this.id, e, 3);
+		}
+		document.getElementById('global_cr_editor').onkeypress=function(e){
+			change_global(this.id, e, 4);
+		}
+		document.getElementById('obj_tag_editor').onkeypress=function(e){
+			change_inspector(this.id, e, 0);
+		}
+		document.getElementById('obj_x_editor').onkeypress=function(e){
+			change_inspector(this.id, e, 1);
+		}
+		document.getElementById('obj_y_editor').onkeypress=function(e){
+			change_inspector(this.id, e, 2);
+		}
+		document.getElementById('obj_width_editor').onkeypress=function(e){
+			change_inspector(this.id, e, 3);
+		}
+		document.getElementById('obj_height_editor').onkeypress=function(e){
+			change_inspector(this.id, e, 4);
+		}
+		document.getElementById('sound_tag_editor').onkeypress=function(e){
+			change_sound(this.id, e, 0);
+		}
+		document.getElementById('sound_volume_editor').onkeypress=function(e){
+			change_sound(this.id, e, 1);
+		}
+		document.getElementById('sound_state_editor').onkeypress=function(e){
+			change_sound(this.id, e, 2);
+		}
+	</script>
+</html>
